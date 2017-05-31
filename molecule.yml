@@ -5,7 +5,7 @@ ansible:
   group_vars:
     packer:
       workstation_download_validate_certs: False
-      workstation_download_url: http://192.168.1.6:8080/share.cgi?ssid=0ZTW8Vu&fid=0ZTW8Vu&filename=VMware-Workstation-Full-12.5.6-5528349.x86_64.bundle&openfolder=forcedownload&ep=
+
 
 dependency:
   name: galaxy
