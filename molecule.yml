@@ -2,6 +2,10 @@
 ansible:
   verbose: False
   playbook: tests/playbook.yml
+  group_vars:
+    packer:
+      workstation_download_validate_certs: False
+      workstation_download_url: http://192.168.1.6:8080/share.cgi?ssid=0ZTW8Vu&fid=0ZTW8Vu&filename=VMware-Workstation-Full-12.5.6-5528349.x86_64.bundle&openfolder=forcedownload&ep=
 
 dependency:
   name: galaxy
@@ -9,8 +13,53 @@ driver:
   name: docker
 docker:
   containers:
-    - name: vmware-workstation
-      image: ubuntu
-      image_version: latest
+#    - name: photon
+#      ansible_groups:
+#       - packer
+#       - jenkins
+#      image: photon
+#      image_version: latest
+#      dockerfile: tests/dockerfiles/photon-latest
+#      privileged: true
+#      volume_mounts:
+#        - '/sys/fs/cgroup:/sys/fs/cgroup:ro'
+
+    - name: centos-7
       ansible_groups:
-        - group1
+       - packer
+       - jenkins
+      image: centos
+      image_version: '7'
+      command: /usr/lib/systemd/systemd
+#
+#    - name: fedora-24
+#      ansible_groups:
+#       - packer
+#       - jenkins
+#      image: fedora
+#      image_version: '24'
+#      command: /lib/systemd/systemd
+
+    - name: ubuntu-xenial
+      ansible_groups:
+       - packer
+       - jenkins
+      image: ubuntu
+      image_version: '16.04'
+      command: /lib/systemd/systemd
+
+    - name: ubuntu-trusty
+      ansible_groups:
+       - packer
+       - jenkins
+      image: ubuntu
+      image_version: '14.04'
+      command: /sbin/init
+
+    - name: ubuntu-precise
+      ansible_groups:
+       - packer
+       - jenkins
+      image: ubuntu
+      image_version: '12.04'
+      command: /sbin/init

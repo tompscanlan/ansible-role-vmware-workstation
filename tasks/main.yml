@@ -6,10 +6,21 @@
     state: directory
     mode: 0755
 
+- name: Install Pre-reqs
+  package:
+    name: "{{ item }}"
+  with_items:
+    - tar
+#    - gcc
+#    - kernel-headers
+#    - kernel-devel
+#    - glibc-headers
+
 - name: Download workstation
   get_url:
     url: "{{ workstation_download_url }}"
     dest: "{{ workstation_tempdir }}/tryworkstation-linux-64.sh"
+    validate_certs: "{{ workstation_download_validate_certs }}"
 
 - name: Mark script executable
   file:

@@ -5,3 +5,4 @@ workstation_tempdir: /tmp/workstation-downloads
 
 # To set a license key at install time, defined this
 # workstation_license: XXXX-yyyy-XXXX
+workstation_download_validate_certs: True
